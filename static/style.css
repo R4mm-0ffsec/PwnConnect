@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('/static/bg.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: #FFFFFF;
+}
+
+/* Centered container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+/* Login box */
+.login-box {
+    width: 368px;
+    min-height: 252px;
+    padding: 20px 40px 40px 40px;
+    border: 1px solid #f0f0f0;
+    background: #ffffff;
+    text-align: center;
+    margin: 9.5% auto auto auto;
+    border: 1px solid #dadcde;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .25);
+}
+
+/* Logo or brand name */
+.brand-logo {
+    margin-bottom: 30px;
+}
+
+.brand-logo img {
+    max-width: 400px;
+    max-height: 400px;
+    margin: 40px auto 25px;
+}
+
+.login-box h1 {
+    font-family: 'Lato';
+    font-size: 20px;
+    font-weight: inherit;
+}
+
+/* Form styling */
+.form-control {
+    display: block;
+    width: 90%;
+    height: 36px;
+    padding: .375rem .75rem 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #3a4248;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #c8cbce;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-width: 0 0 1px;
+    border-radius: 0;
+    box-shadow: none;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin: 0 auto 20px auto;
+}
+
+.form-control:focus {
+    border-bottom: 2px solid #0ba4e8;
+}
+
+.login-button {
+    width: 24%;
+    height: 150%;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    background: #0ba4e8;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.login-button:hover {
+    background: #007fad;
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        width: 90%;
+        box-sizing: border-box;
+    }
+}
