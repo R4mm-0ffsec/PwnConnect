@@ -1,10 +1,10 @@
 # PwnConnect
 
-![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/phishing-simulation-page)
-![GitHub branches](https://img.shields.io/github/branches/yourusername/phishing-simulation-page)
-![GitHub stars](https://img.shields.io/github/stars/yourusername/phishing-simulation-page)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/phishing-simulation-page)
-![GitHub license](https://img.shields.io/github/license/yourusername/phishing-simulation-page)
+![GitHub last commit](https://img.shields.io/github/last-commit/pwncat-offsec/PwnConnect)
+![GitHub branches](https://img.shields.io/github/branches/pwncat-offsec/PwnConnect)
+![GitHub stars](https://img.shields.io/github/stars/pwncat-offsec/PwnConnect)
+![GitHub issues](https://img.shields.io/github/issues/pwncat-offsec/PwnConnect)
+![GitHub license](https://img.shields.io/github/license/pwncat-offsec/PwnConnect)
 
 This project is a web-based phishing simulation portal using Flask and OpenConnect to simulate a VPN login page. It provides a login interface for users to authenticate with their username and password, and supports OTP (One-Time Password) for two-factor authentication.
 
