@@ -17,6 +17,8 @@
 
             <form action="/submit-otp" method="POST">
                 <input type="hidden" name="username" value="{{ username }}"/>
+                <img src="/static/{{image_filename}}" alt="Logo">
+                <p>
                 <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required/>
                 <button type="submit" class="login-button">SUBMIT</button>
             </form>
