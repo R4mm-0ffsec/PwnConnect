@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .split-left {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            left: 0; /* Azul oscuro */
+            background-image:  url("{{ url_for('static', filename='backgd.png') }}");
+            
+        }
+        .header{
+            padding-top:86px;
+            min-height:0px;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+        .split-right {
+            height: 100%;
+            width: 500px;
+            position: fixed;
+            right: 0;
+            background-color: white;
+            overflow-y: auto;
+        }
+        .content{
+            min-height: 100%;
+            height: auto !important;
+            padding:0px 150px 0px 50px;
+        }
+        .workArea{
+            margin-bottom: 60px;
+            margin-top: 35px;
+            width: 350px;
+            word-wrap: break-word;
+        }
+        .login-box {
+            max-width: 0px;
+            margin-top: 0px; /* Espacio arriba */
+        }
+        .login-logo {
+            width: auto;
+            height: auto;
+            margin: 0px;
+            padding: 0px;
+
+        }
+        .loginMessage {
+            font-size:0.9em;
+            font-weight: normal;
+            margin-bottom: 30px;
+        }
+        .btn-primary {
+            border-radius: 0;
+            background-color: rgb(38,114,236);
+            padding: 4px 20px 6px 20px;
+            border-style: solid;
+            border-width: 1px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+
+        }
+        .links {
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        .links a {
+            display: block;
+           
+        }
+        .form-control{
+            height: 28px;
+            padding: 0px 3px 0px 3px;
+            border: solid 1px #BABABA;
+            width: 342px;
+            margin-bottom: 8px;
+            max-width: 100%;
+            font-size: 0.9em;
+            font-weight: normal;
+            border-radius: 0;
+        }
+        .SubmissionArea {
+            margin-top: 38px;
+            margin-bottom: 30px;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="split-left"></div>
+
+<div class="split-right">
+    <div class="content">
+        <div class="header">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        </div>
+        <div class="login-box">
+            <main>
+                <div class="workArea">
+                    <div class="loginMessage">Iniciar sesión</div>
+                    <div class="login-form">
+                        <form action="/connect" method="POST">
+                            <div>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Domain\Username" required autofocus>
+                            </div>
+                            <div>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+                            </div>
+                            <div class="SubmissionArea">
+                                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="links mt-4">
+                    Si quiere cambiar su contraseña, vaya al siguiente link <a href="#">Cambiar contraseña</a>
+                    Para autogestionar su usuario, regístrese y utilice la herramienta <a href="#">ADSelfService</a>
+                    </div>
+                </div>
+            </main>
+    </div>
+</div>
+
+</body>
+</html>
